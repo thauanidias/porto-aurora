@@ -1,0 +1,22 @@
+import { expect, it, vi } from "vitest";
+import { fireEvent, render, screen } from "@testing-library/react";
+import "@testing-library/jest-dom/vitest";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { CompleteManagerInterview } from "./CompleteManagerInterview";
+vi.mock("../lib/session", () => ({ useSession: () => ({ data: { permissions: ["interview.manage", "candidate.move"] } }) }));
+it("records the selected scheduled interview as completed", async () => {
+  const fetchMock = vi.fn(async (_url: string, options?: RequestInit) => new Response(JSON.stringify(options?.method === "POST" ? { status: "COMPLETED" } : { items: [{ id: "meeting", version: 3, title: "Entrevista técnica", starts_at: "2026-11-07T18:00:00Z", status: "SCHEDULED" }] }), { status: 200 }));
+  vi.stubGlobal("fetch", fetchMock);
+  const client = new QueryClient();
+  const invalidation = vi.spyOn(client, "invalidateQueries");
+  const view = render(<QueryClientProvider client={client}><CompleteManagerInterview applicationId="own-application" /></QueryClientProvider>);
+  fireEvent.click(screen.getByRole("button", { name: "Validar entrevista com gestor" }));
+  fireEvent.click(await screen.findByRole("button", { name: "Validar e aprovar entrevista" }));
+  expect(await screen.findByRole("status")).toHaveTextContent("Entrevista validada e aprovada");
+  const request = fetchMock.mock.calls.find(([url]) => url.endsWith("/interviews/meeting/status"));
+  expect(JSON.parse(String(request?.[1]?.body))).toMatchObject({ version: 3, status: "COMPLETED" });
+  const approval = fetchMock.mock.calls.find(([url]) => url.endsWith("/stage-reviews"));
+  expect(JSON.parse(String(approval?.[1]?.body))).toMatchObject({ status: "APPROVED" });
+  expect(invalidation).toHaveBeenCalledWith({ queryKey: ["vacancy-applications"] });
+  view.unmount(); client.clear(); vi.unstubAllGlobals();
+});

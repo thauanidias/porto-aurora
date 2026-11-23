@@ -1,0 +1,543 @@
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("/assets/brand/fonts/SourceSansPro-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("/assets/brand/fonts/SourceSansPro-Semibold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("/assets/brand/fonts/SourceSansPro-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Source Sans Pro";
+  src: url("/assets/brand/fonts/SourceSansPro-Italic.ttf") format("truetype");
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+}
+/* Manual Porto Aurora, pp. 11–14. The corporate artwork keeps its original geometry. */
+h1,
+.jobs-section h2 {
+  font-family: "Source Sans Pro", Arial, sans-serif;
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.015em;
+}
+h1 {
+  font-size: 2.75rem;
+  line-height: 1.08;
+}
+.brand {
+  display: inline-flex;
+  flex-shrink: 0;
+}
+.brand-lockup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 10px;
+  padding: 6px 0;
+}
+.brand-mark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  background: transparent;
+}
+.official-logo {
+  display: block;
+  width: 160px;
+  height: auto;
+  flex-shrink: 0;
+}
+.brand-custom .official-logo {
+  max-height: 80px;
+  object-fit: contain;
+}
+.brand-custom {
+  padding: 12px;
+  background: #fff;
+}
+.brand-product {
+  display: block;
+  margin: 0;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.4;
+  text-align: center;
+}
+.logo-inverse {
+  display: none;
+}
+:root[data-theme="dark"] .brand-mark,
+.brand-inverse .brand-mark {
+  background: transparent;
+}
+:root[data-theme="dark"] .logo-primary,
+.brand-inverse .logo-primary {
+  display: none;
+}
+:root[data-theme="dark"] .logo-inverse,
+.brand-inverse .logo-inverse {
+  display: block;
+}
+:root[data-theme="dark"] .brand-custom,
+.brand-inverse .brand-custom {
+  background: #fff;
+}
+.brand-inverse .brand-product {
+  color: #fff;
+}
+.sidebar {
+  padding-top: 10px;
+  border-top: 3px solid var(--identity);
+}
+.sidebar .brand {
+  padding: 0;
+  align-self: center;
+  margin-bottom: 20px;
+}
+.sidebar nav a.active {
+  box-shadow: inset 3px 0 var(--identity);
+  font-weight: 600;
+}
+.workspace-label {
+  font-size: 0.66rem;
+  letter-spacing: 0.07em;
+}
+.collapsed-brand-icon {
+  display: none;
+}
+.metric {
+  border-top: 2px solid var(--identity);
+}
+.public-header {
+  height: auto;
+  min-height: 120px;
+}
+.career-hero {
+  min-height: 480px;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  padding-top: 52px;
+  padding-bottom: 76px;
+  background: var(--surface);
+}
+.career-hero::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 22px;
+  background: url("/assets/brand/aurora-waves.svg") repeat-x left bottom / auto
+    22px;
+}
+.hero-copy h1 {
+  font-family: "Source Sans Pro", Arial, sans-serif;
+  font-size: clamp(3.8rem, 5vw, 5rem);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: 0.01em;
+  margin: 18px 0 22px;
+  text-wrap: balance;
+}
+.hero-copy h1 > span {
+  display: block;
+}
+.hero-title-accent {
+  color: var(--identity);
+}
+.hero-copy > .eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  letter-spacing: 0.14em;
+}
+.hero-copy > .eyebrow::before {
+  content: "";
+  width: 24px;
+  height: 2px;
+  background: var(--identity);
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px 24px;
+  margin-top: 26px;
+}
+.hero-actions .hero-link {
+  margin-top: 0;
+  min-height: 48px;
+}
+.hero-register-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+}
+.hero-register-link:hover {
+  color: var(--brand);
+  text-decoration: underline;
+}
+.hero-copy > p:not(.eyebrow) {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+.hero-link {
+  color: #fff;
+  background: var(--identity);
+  padding: 13px 18px;
+  border-radius: 5px;
+  font-size: 0.95rem;
+}
+.hero-link:hover {
+  background: var(--action-hover);
+  text-decoration: none;
+}
+.brand-art {
+  display: grid;
+  place-items: center;
+  min-width: 0;
+  align-self: stretch;
+}
+.brand-art > img {
+  display: block;
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+}
+.brand-art.has-photo {
+  min-height: 310px;
+  background: var(--background);
+  aspect-ratio: 4 / 3;
+  align-self: center;
+  border-radius: 8px;
+  overflow: hidden;
+  border-bottom: 4px solid var(--identity);
+}
+.brand-art.has-photo > img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center;
+}
+.brand-art.people-photo {
+  aspect-ratio: 3 / 2;
+  min-height: 0;
+  background: #f5f5f4;
+  border-radius: 16px;
+  border-bottom: 0;
+}
+.brand-art.people-photo > img {
+  object-fit: contain;
+  object-position: center bottom;
+}
+.jobs-section h2 {
+  font-size: 2.6rem;
+  letter-spacing: 0.015em;
+  line-height: 1.1;
+}
+.jobs-section {
+  padding-top: 42px;
+}
+.talent-invitation {
+  border-left: 3px solid var(--identity);
+}
+.auth-aside {
+  padding: 28px 10% 54px;
+  background: var(--identity);
+  color: #fff;
+  min-height: 680px;
+}
+.auth-aside > .brand {
+  align-self: flex-start;
+}
+.auth-aside .official-logo {
+  width: 220px;
+}
+.auth-aside .brand-product {
+  font-size: 0.875rem;
+  letter-spacing: 0.2em;
+}
+.auth-aside::after {
+  inset: auto 0 0;
+  width: 100%;
+  height: 25px;
+  background: url("/assets/brand/aurora-waves.svg") repeat-x left bottom /
+    auto 25px;
+}
+.auth-aside .eyebrow,
+.auth-aside p:not(.eyebrow),
+.auth-aside > span {
+  color: #fff;
+}
+.auth-aside h1 {
+  font-family: "Source Sans Pro", Arial, sans-serif;
+  font-size: clamp(3.8rem, 5.2vw, 5.3rem);
+  line-height: 1.02;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+.auth-card h1 {
+  font-size: 2.45rem;
+}
+.auth-card form {
+  margin-top: 24px;
+}
+:root[data-theme="dark"] .career-hero {
+  background: var(--surface);
+}
+:root[data-theme="dark"] .auth-aside {
+  background: var(--identity);
+}
+
+@media (min-width: 901px) {
+  .sidebar-collapsed .sidebar .brand {
+    padding: 18px 0;
+  }
+  .sidebar-collapsed .brand-lockup {
+    display: none;
+  }
+  .sidebar-collapsed .collapsed-brand-icon {
+    display: block;
+    color: var(--brand);
+  }
+}
+@media (max-width: 1200px) {
+  .career-hero {
+    gap: 30px;
+  }
+  .hero-copy h1 {
+    font-size: clamp(3.4rem, 6vw, 4.5rem);
+  }
+}
+@media (max-width: 900px) {
+  .sidebar-collapsed .sidebar {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .sidebar-collapsed .sidebar .brand {
+    padding: 0;
+  }
+  .sidebar-collapsed .sidebar .brand-lockup,
+  .sidebar-collapsed .sidebar .brand-mark {
+    display: flex;
+  }
+  .sidebar-collapsed .sidebar .brand-product {
+    display: block;
+  }
+  .sidebar-collapsed .sidebar-bottom > button {
+    display: none;
+  }
+  .career-hero {
+    grid-template-columns: 1.2fr 0.8fr;
+    min-height: 420px;
+    padding-top: 35px;
+    padding-bottom: 55px;
+    gap: 20px;
+  }
+  .hero-copy h1 {
+    font-size: 3.65rem;
+  }
+  .auth-aside {
+    padding: 26px 9% 50px;
+  }
+  .auth-aside h1 {
+    font-size: 3.5rem;
+  }
+}
+@media (max-width: 600px) {
+  h1 {
+    font-size: 2.25rem;
+  }
+  .public-header {
+    min-height: 116px;
+    padding: 16px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .public-header nav {
+    gap: 8px;
+    flex-direction: column;
+    align-items: flex-end;
+    flex: 1;
+  }
+  .public-header .button {
+    white-space: normal;
+    line-height: 1.2;
+    text-align: left;
+  }
+  .public-header .button svg {
+    flex-shrink: 0;
+  }
+  .career-hero {
+    display: block;
+    min-height: 0;
+    padding: 32px 24px 58px;
+  }
+  .hero-copy h1 {
+    font-size: clamp(3.25rem, 11vw, 4.1rem);
+    letter-spacing: 0.01em;
+  }
+  .hero-copy > p:not(.eyebrow) {
+    font-size: 0.95rem;
+  }
+  .brand-art {
+    display: none;
+  }
+  .brand-art.has-photo {
+    display: grid;
+    min-height: 0;
+    margin-top: 28px;
+    width: 100%;
+  }
+  .career-hero::after {
+    height: 16px;
+    background-size: auto 16px;
+  }
+  .jobs-section h2 {
+    font-size: 2.1rem;
+  }
+  .jobs-section .eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+  }
+  .section-heading {
+    align-items: flex-end;
+  }
+  .auth-aside {
+    min-height: 0;
+    padding: 6px 24px;
+  }
+  .auth-aside::after {
+    display: none;
+  }
+  .auth-aside > .brand {
+    margin-left: 0;
+  }
+  .auth-main {
+    padding: 30px 24px;
+  }
+  .auth-card h1 {
+    font-size: 2.3rem;
+  }
+}
+@media (max-width: 360px) {
+  .public-header {
+    flex-direction: column;
+    padding-bottom: 18px;
+  }
+}
+
+/* Shared fluid gutters keep the portal aligned at every screen size. */
+.public-header,
+.career-hero,
+.jobs-section {
+  width: 100%;
+  max-width: 1600px;
+  margin-inline: auto;
+  padding-inline: clamp(24px, 4vw, 64px);
+}
+
+.career-hero {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  min-height: 0;
+  gap: clamp(24px, 3vw, 48px);
+  padding-block: clamp(28px, 3vw, 44px) 54px;
+}
+
+.careers > .public-header {
+  min-height: 104px;
+}
+
+.careers .jobs-section {
+  padding-top: 32px;
+}
+
+.careers .hero-copy {
+  max-width: none;
+}
+
+.careers .brand-art.people-photo {
+  width: 100%;
+  max-width: 600px;
+  justify-self: end;
+}
+
+.careers .public-footer {
+  padding-inline: max(24px, calc((100% - 1472px) / 2));
+}
+
+.hero-copy {
+  min-width: 0;
+}
+
+@media (max-width: 1100px) and (min-width: 601px) {
+  .career-hero {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding-block: 44px 66px;
+  }
+
+  .hero-copy,
+  .brand-art.has-photo {
+    width: 100%;
+    max-width: 640px;
+    margin-inline: auto;
+  }
+
+  .brand-art.has-photo {
+    max-width: 540px;
+    min-height: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .careers .career-hero {
+    padding-block: 28px 44px;
+  }
+
+  .careers .public-header {
+    padding-inline: 16px;
+  }
+
+  .careers .brand-art.people-photo {
+    max-width: 100%;
+  }
+}
+
+/* Approved Porto Aurora identity, with a light surface on dark backgrounds. */
+.brand-mark.aurora-logo-frame { max-width: 100%; border-radius: 8px; }
+.aurora-logo-frame .aurora-logo { width: 180px; max-width: 100%; height: auto; }
+.brand-inverse .aurora-logo-frame,
+:root[data-theme="dark"] .aurora-logo-frame { background: #fff; padding: 8px; }
+.sidebar .aurora-logo-frame { background: #fff; padding: 6px; }
+
+/* Porto Aurora palette: petroleum teal with warm gold accents. */
+:root { --accent: #e8bb65; --accent-ink: #624510; }
+.hero-title-accent { color: var(--brand); }
+.career-hero { border-bottom: 3px solid var(--accent); }
+.auth-aside .eyebrow, .candidate-login .auth-aside .eyebrow { color: var(--accent); }
+.sidebar nav a[aria-current="page"] { box-shadow: inset 3px 0 0 var(--accent); }
+::selection { background: #e8bb65; color: #123c43; }

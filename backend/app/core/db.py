@@ -1,0 +1,29 @@
+from collections.abc import Generator
+from datetime import UTC, datetime
+
+from sqlalchemy import create_engine
+from sqlalchemy.orm import DeclarativeBase, Session, sessionmaker
+
+from app.core.config import settings
+
+
+def utcnow() -> datetime:
+    return datetime.now(UTC)
+
+
+class Base(DeclarativeBase):
+    pass
+
+
+engine = create_engine(settings().database_url, pool_pre_ping=True)
+SessionLocal = sessionmaker(engine, expire_on_commit=False)
+
+
+def get_db() -> Generator[Session, None, None]:
+    with SessionLocal() as db:
+        try:
+            yield db
+            db.commit()
+        except Exception:
+            db.rollback()
+            raise

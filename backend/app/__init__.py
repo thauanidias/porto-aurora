@@ -1,0 +1,1 @@
+"""Porto Aurora Talentos application."""

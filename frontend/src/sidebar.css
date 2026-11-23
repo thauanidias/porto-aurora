@@ -1,0 +1,115 @@
+/* Workspace navigation, shared by RH, managers and candidates. */
+.sidebar .message-unread-count { display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; margin-left:auto; min-width:25px; height:25px; padding:0 6px; border-radius:8px; background:var(--brand-tint); color:var(--brand); border:1px solid var(--border); font-size:.75rem; font-weight:750; }
+.sidebar nav a.active .message-unread-count { background:white; color:#145c67; border-color:white; }
+.sidebar nav a.active[data-message-entry=true]::after { display:none; }
+.app-layout .sidebar {
+  width: 264px;
+  padding: 24px 14px 14px;
+  border-top: 0;
+  border-right: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: 6px 0 28px rgb(20 28 40 / 3%);
+}
+.app-layout .workspace { margin-left: 264px; }
+.sidebar .brand {
+  flex-shrink: 0;
+  margin: 0 auto 22px;
+  padding: 0 12px;
+}
+.sidebar .brand-mark { max-width: 148px; }
+.sidebar .brand-product { font-size: .63rem; letter-spacing: .26em; }
+.sidebar .workspace-label {
+  flex-shrink: 0;
+  align-self: center;
+  margin: 0 0 20px;
+  padding: 7px 12px;
+  border: 1px solid color-mix(in srgb, var(--identity) 12%, var(--border));
+  border-radius: 7px;
+  background: color-mix(in srgb, var(--identity) 4%, var(--surface));
+  color: var(--brand);
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+}
+.sidebar nav { gap: 4px; padding: 0 2px 16px; scrollbar-width: thin; }
+.sidebar-nav-entry { flex-shrink: 0; }
+.sidebar-section-label {
+  margin: 15px 10px 8px;
+  color: var(--muted);
+  font-size: .65rem;
+  font-weight: 650;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+}
+.sidebar-nav-entry:first-child .sidebar-section-label { margin-top: 0; }
+.sidebar nav a, .sidebar .rh-nav-more > summary, .sidebar-bottom a, .sidebar-bottom button {
+  position: relative;
+  gap: 10px;
+  min-height: 43px;
+  padding: 6px 10px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-size: .84rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--muted);
+  transition: background-color .16s, color .16s, border-color .16s;
+}
+.sidebar nav a > svg:first-child, .sidebar .rh-nav-more > summary > svg:first-child, .sidebar-bottom a > svg {
+  width: 30px;
+  height: 30px;
+  padding: 6px;
+  border-radius: 8px;
+  background: var(--background);
+  stroke-width: 1.7;
+}
+.sidebar nav a:hover, .sidebar .rh-nav-more > summary:hover, .sidebar-bottom a:hover, .sidebar-bottom button:hover {
+  background: var(--background);
+  color: var(--text);
+  text-decoration: none;
+}
+.sidebar nav a.active {
+  color: white;
+  background: var(--identity);
+  border-color: var(--identity);
+  box-shadow: 0 4px 10px color-mix(in srgb, var(--identity) 18%, transparent);
+  font-weight: 650;
+}
+.sidebar nav a.active > svg:first-child { background: rgb(255 255 255 / 14%); }
+.sidebar nav a.active::after {
+  content: "";
+  width: 5px;
+  height: 5px;
+  margin-left: auto;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: white;
+}
+.sidebar a:focus-visible, .sidebar button:focus-visible, .sidebar summary:focus-visible {
+  outline: 2px solid var(--identity);
+  outline-offset: 3px;
+}
+.sidebar .rh-nav-more { margin-top: 14px; padding-top: 12px; }
+.sidebar .rh-nav-more > summary { list-style: none; }
+.sidebar .nav-chevron { margin-left: auto; transition: transform .16s; }
+.sidebar .rh-nav-more[open] > summary .nav-chevron { transform: rotate(180deg); }
+.sidebar .rh-nav-more > a { margin-top: 4px; }
+.sidebar-bottom { flex-shrink: 0; padding-top: 12px; }
+.sidebar-bottom > button { margin-top: 5px; min-height: 34px; font-size: .72rem; }
+.sidebar-bottom > button svg { margin: 0 6px; }
+@media (min-width: 901px) {
+  .sidebar-collapsed .sidebar { width: 78px; padding-inline: 9px; }
+  .sidebar-collapsed .workspace { margin-left: 78px; }
+  .sidebar-collapsed .sidebar .brand { margin-bottom: 18px; padding: 10px 0; }
+  .sidebar-collapsed .sidebar-section-label, .sidebar-collapsed .sidebar .nav-chevron { display: none; }
+  .sidebar-collapsed .sidebar nav a, .sidebar-collapsed .sidebar .rh-nav-more > summary, .sidebar-collapsed .sidebar-bottom a { justify-content: center; padding: 6px; }
+  .sidebar-collapsed .sidebar nav a.active::after { display: none; }
+  .sidebar-collapsed .sidebar-bottom > button svg { transform: rotate(180deg); }
+}
+@media (max-width: 900px) {
+  .app-layout .sidebar { width: 264px !important; }
+  .app-layout .workspace { margin-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sidebar *, .sidebar *::after { transition: none !important; }
+}

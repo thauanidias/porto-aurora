@@ -1,0 +1,72 @@
+/* Refinements to the original Porto Aurora careers layout. */
+.careers-home { min-height: 100dvh; background: var(--surface); }
+.careers-home .public-header nav { gap: 18px; }
+.careers-home .public-header nav > a { min-height: 40px; border-radius: 7px; padding-inline: 16px; }
+.careers-home .career-hero { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; }
+.careers-home .hero-copy > p:not(.eyebrow) { line-height: 1.85; }
+.careers-home .hero-actions { flex-wrap: wrap; gap: 14px 24px; }
+.careers-home .hero-link { border-radius: 7px; }
+.careers-home .brand-art.people-photo { border-radius: 18px; overflow: hidden; }
+.careers-home .job-search { border-radius: 10px; padding: 20px; gap: 16px; }
+.careers-home .job-search .field > span { font-size: .8rem; }
+.careers-home .job-search .search-field,
+.careers-home .job-search .field > input,
+.careers-home .job-search select { min-height: 44px; border-radius: 7px; }
+.career-opportunity-count { color: var(--muted); font-size: .85rem; }
+.career-filter-summary { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; font-size: .8rem; color: var(--muted); }
+.careers-home .job-row { border-radius: 0; }
+.careers-home .job-code { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; color: var(--brand); font-size: .62rem; }
+.careers-home .job-code > span { color: var(--muted); margin-left: 6px; }
+.career-job-action { display: inline-flex; align-items: center; gap: 10px; color: var(--brand); font-size: .8rem; white-space: nowrap; }
+.careers-home a:focus-visible, .careers-home button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
+@media (min-width: 801px) and (max-width: 1100px) {
+  .careers-home .hero-copy, .careers-home .brand-art.has-photo { margin-inline: 0; }
+  .careers-home .hero-copy h1 { font-size: clamp(2.8rem, 4.9vw, 3.6rem); }
+}
+@media (max-width: 800px) {
+  .careers-home .career-hero { grid-template-columns: 1fr; gap: 28px; }
+  .careers-home .brand-art.people-photo { justify-self: center; }
+  .careers-home .job-search { grid-template-columns: 1fr 1fr; }
+  .careers-home .career-search-label { grid-column: 1 / -1; }
+}
+@media (max-width: 600px) {
+  .careers-home .public-header { flex-wrap: wrap; gap: 16px; padding-block: 16px; }
+  .careers-home .public-header nav { display: flex; flex-wrap: wrap; gap: 10px; }
+  .careers-home .public-header nav > a { font-size: .72rem; padding-inline: 12px; }
+  .careers-home .job-search { grid-template-columns: 1fr; padding: 16px; }
+  .careers-home .section-heading { flex-wrap: wrap; gap: 12px; }
+  .careers-home .job-row { flex-wrap: wrap; gap: 18px; }
+  .career-job-action { margin-left: auto; }
+}
+@media (prefers-reduced-motion: reduce) { .careers-home .job-row { transition: none; } }
+
+/* Vacancy details retain the public portal identity. */
+.job-detail-modern { max-width: 1200px; padding-top: 32px; }
+.job-detail-modern > .back-link { display: inline-flex; margin-bottom: 24px; font-size: .82rem; }
+.job-detail-modern .job-detail-heading { align-items: center; padding: 28px 30px; margin-bottom: 28px; border: 1px solid var(--border); border-top: 3px solid var(--brand); border-radius: 12px; background: var(--surface); gap: 28px; }
+.job-detail-modern .job-detail-heading > div:first-child { min-width: 0; flex: 1; }
+.job-detail-modern .job-detail-heading .eyebrow { margin-bottom: 10px; font-size: .65rem; }
+.job-detail-modern .job-detail-heading h1 { margin: 0 0 16px; font-size: clamp(2rem, 3.2vw, 2.8rem); line-height: 1.15; overflow-wrap: anywhere; }
+.job-detail-modern .job-meta { margin: 0; gap: 10px; }
+.job-detail-modern .job-meta > span { display: inline-flex; align-items: center; gap: 7px; padding: 6px 10px; background: var(--background); border-radius: 6px; font-size: .78rem; }
+.job-application-actions { display: flex; flex-direction: column; align-items: stretch; gap: 10px; flex-shrink: 0; }
+.job-application-actions .button { min-height: 44px; justify-content: center; border-radius: 7px; }
+.job-detail-modern .job-detail-grid { grid-template-columns: minmax(0, 1fr) 300px; gap: 28px; align-items: start; }
+.job-detail-modern .job-detail-grid > article { min-width: 0; background: var(--surface); padding: 30px; border: 1px solid var(--border); border-radius: 12px; }
+.job-detail-modern .job-detail-grid article section { margin-bottom: 26px; padding-bottom: 26px; border-bottom: 1px solid var(--border); }
+.job-detail-modern .job-detail-grid article section:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: 0; }
+.job-detail-modern .job-detail-grid article h2 { margin: 0 0 12px; font-size: 1.05rem; line-height: 1.4; }
+.job-detail-modern .job-detail-grid article p { margin: 0; line-height: 1.9; overflow-wrap: anywhere; }
+.job-detail-modern .job-summary { border-radius: 12px; padding: 24px; }
+.job-detail-modern .job-summary h3 { font-size: .98rem; margin: 0 0 16px; }
+.job-detail-modern .job-summary dl { margin: 0 0 24px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+.job-detail-modern .job-summary dd { font-weight: 500; }
+.job-detail-modern .steps { list-style: none; counter-reset: job-stage; padding: 0; margin: 0 0 24px; }
+.job-detail-modern .steps li { counter-increment: job-stage; display: flex; align-items: baseline; gap: 10px; padding: 0; margin-bottom: 12px; line-height: 1.5; }
+.job-detail-modern .steps li::before { content: counter(job-stage); display: inline-grid; place-items: center; min-width: 23px; height: 23px; border-radius: 50%; background: var(--brand-tint); color: var(--brand); font-size: .7rem; }
+.job-detail-modern a:focus-visible, .job-detail-modern button:focus-visible { outline: 2px solid var(--brand); outline-offset: 4px; }
+@media (max-width: 850px) { .job-detail-modern .job-detail-grid { grid-template-columns: 1fr; } .job-detail-modern .job-detail-heading { align-items: flex-start; } }
+@media (max-width: 600px) { .job-detail-modern { padding: 24px 16px 40px; } .job-detail-modern .job-detail-heading { flex-direction: column; padding: 22px 20px; gap: 22px; } .job-application-actions { width: 100%; } .job-detail-modern .job-detail-grid > article, .job-detail-modern .job-summary { padding: 22px 20px; } }
+
+.careers-home .career-hero { grid-template-columns: 1fr; }
+.careers-home .hero-copy { max-width: 850px; }

@@ -1,0 +1,52 @@
+import { afterEach, expect, it, vi } from "vitest";
+import { cleanup, fireEvent, render, screen, waitFor } from "@testing-library/react";
+import "@testing-library/jest-dom/vitest";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ApplicationsDirectory } from "./ApplicationsDirectory";
+
+vi.mock("../lib/session", () => ({ useSession: () => ({ data: { permissions: ["candidate.view"] }, isPending: false }) }));
+afterEach(() => { cleanup(); vi.unstubAllGlobals(); });
+it("consulta todo o histórico sem filtrar a origem e permite filtrar candidaturas internas", async () => {
+  const fetch = vi.fn<(url: string) => Promise<Response>>(async () => new Response(JSON.stringify({ items: [{ id: "closed-1", candidate: { name: "Pessoa Histórico" }, vacancy_title: "Analista", stage_name: "Finalistas", status: "REJECTED", recruitment_type: "INTERNAL" }], total: 1 }), { status: 200 }));
+  vi.stubGlobal("fetch", fetch);
+  const client = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+  render(<QueryClientProvider client={client}><MemoryRouter><ApplicationsDirectory archive /></MemoryRouter></QueryClientProvider>);
+  fireEvent.click(screen.getByRole("button", { name: "Histórico de candidaturas" }));
+  expect(await screen.findByText("Pessoa Histórico")).toBeVisible();
+  expect(fetch.mock.calls.find(([url]) => url.includes("/applications?"))?.[0]).not.toContain("recruitment_type");
+  expect(fetch.mock.calls.find(([url]) => url.includes("/applications?"))?.[0]).not.toContain("status=REJECTED");
+  expect(screen.getByRole("heading", { name: "Banco de talentos" })).toBeVisible();
+  expect(screen.queryByRole("button", { name: "Novo registro" })).not.toBeInTheDocument();
+  fireEvent.change(screen.getByRole("combobox", { name: "Público" }), { target: { value: "INTERNAL" } });
+  await waitFor(() => expect(fetch.mock.calls.at(-1)?.[0]).toContain("recruitment_type=INTERNAL"));
+  client.clear();
+});
+it("consulta todos os perfis e permite abrir os registros preservados", async () => {
+  const fetch = vi.fn().mockImplementation(async () => new Response(JSON.stringify({ items: [{ id: "profile-1", name: "Pessoa não selecionada", recruitment_type: "INTERNAL", talent_available: true, vacancy_titles: ["Analista anterior"], process_history: [{ application_id: "old-application", vacancy_title: "Analista anterior", status: "REJECTED", stage_name: "Triagem", stage_kind: "SCREENING" }] }], total: 1 }), { status: 200 }));
+  vi.stubGlobal("fetch", fetch);
+  render(<QueryClientProvider client={new QueryClient()}><MemoryRouter><ApplicationsDirectory archive /></MemoryRouter></QueryClientProvider>);
+  expect(await screen.findByText("Pessoa não selecionada")).toBeVisible();
+  expect(screen.getByText("Analista anterior")).toBeVisible();
+  expect(fetch.mock.calls[0][0]).not.toContain("talent_bank=true");
+  expect(screen.getByRole("link", { name: "Ver perfil e registros" })).toHaveAttribute("href", "/app/candidatos/profile-1");
+  fireEvent.change(screen.getByRole("combobox", { name: "Público" }), { target: { value: "INTERNAL" } });
+  await waitFor(() => expect(fetch.mock.calls.at(-1)?.[0]).toContain("recruitment_type=INTERNAL"));
+});
+it.each([true, false])("loads the correct application origin and opens its process, internal=%s", async internal => {
+  const fetch = vi.fn(async (url: string) => new Response(JSON.stringify(url.includes("group_by_vacancy=true") ? { items: [{ id: "job-1", title: "Analista", code: "JOB-1", application_count: 1, status: "PUBLISHED" }], total: 1 } : { items: [{ id: "process-1", candidate: { name: "Pessoa Teste" }, vacancy_title: "Analista", stage_name: "Inscritos", status: "ACTIVE", compatibility_rank: 2, compatibility: { percentage: 85, status: "CALCULATED" } }], total: 1 }), { status: 200 }));
+  vi.stubGlobal("fetch", fetch);
+  const path = internal ? "/app/candidaturas-internas" : "/app/candidaturas";
+  render(<QueryClientProvider client={new QueryClient()}><MemoryRouter initialEntries={[path]}><Routes><Route path={path} element={<ApplicationsDirectory internal={internal} />} /><Route path="/app/candidaturas/:id" element={<p>Detalhes do processo</p>} /></Routes></MemoryRouter></QueryClientProvider>);
+  expect(await screen.findByText("Analista")).toBeVisible();
+  fireEvent.click(screen.getByRole("button", { name: "Ver candidatos" }));
+  expect(await screen.findByText("Pessoa Teste")).toBeInTheDocument();
+  expect(screen.getByText("2º lugar")).toBeVisible();
+  expect(screen.getByText("85% de compatibilidade")).toBeVisible();
+  expect(fetch.mock.calls[0][0]).toContain("recruitment_type=" + (internal ? "INTERNAL" : "EXTERNAL"));
+  expect(fetch.mock.calls.at(-1)?.[0]).toContain("vacancy_id=job-1");
+  expect(fetch.mock.calls.at(-1)?.[0]).toContain("passed_screening=true");
+  expect(screen.queryByRole("navigation", { name: "Tipo de candidatura" })).not.toBeInTheDocument();
+  fireEvent.click(screen.getByRole("link", { name: "Acompanhar candidatura de Pessoa Teste" }));
+  expect(await screen.findByText("Detalhes do processo")).toBeInTheDocument();
+});

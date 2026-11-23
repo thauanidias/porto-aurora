@@ -1,0 +1,115 @@
+/* Shared device rules; loaded last to keep all portals on the same breakpoints. */
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 20px; }
+#root, .app-layout, .workspace, .main-content { min-width: 0; }
+img, video, canvas { max-width: 100%; }
+fieldset { min-inline-size: 0; }
+.field, .form-section, .surface, .page-title > div, .section-heading > div,
+.register-intro, .register-card, .job-detail-grid > *, .auth-main, .auth-card { min-width: 0; }
+.field input, .field select, .field textarea { max-width: 100%; min-width: 0; }
+.alert, .record-detail dd, .candidate-fields dd, .vacancy-board-identity, .job-detail-heading h1 { overflow-wrap: anywhere; }
+.table-scroll { max-width: 100%; overscroll-behavior-x: contain; }
+.tabs { max-width: 100%; overscroll-behavior-x: contain; }
+.tabs > button { flex-shrink: 0; }
+.modal { overscroll-behavior: contain; scroll-padding-block: 20px; }
+.modal-header > h2 { min-width: 0; overflow-wrap: anywhere; }
+.modal-header .icon-button { flex-shrink: 0; }
+.register-layout { width: 100%; max-width: 1080px; grid-template-columns: minmax(0, 1fr) minmax(0, 460px); }
+.register-progress { flex-wrap: wrap; }
+.app-footer { gap: 12px; flex-wrap: wrap; }
+.sidebar-close { display: none; }
+.manager-module-nav { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; margin: 0 0 24px; }
+.manager-module-nav a { display: flex; align-items: center; gap: 12px; min-width: 0; padding: 18px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); color: var(--text); text-decoration: none; font-weight: 600; }
+.manager-module-nav a.active { color: var(--brand); border-color: var(--brand); background: var(--brand-tint); }
+.manager-module-nav a:hover { border-color: var(--brand); }
+.manager-module-nav svg { flex-shrink: 0; }
+.manager-module-nav small { display: block; margin-top: 4px; color: var(--muted); font-size: .78rem; font-weight: 400; }
+
+@media (max-width: 1024px) {
+  .app-layout .sidebar { width: min(300px, calc(100vw - 48px)) !important; transform: translateX(-100%); visibility: hidden; transition: transform .2s, visibility .2s; }
+  .app-layout.mobile-open .sidebar { transform: none; visibility: visible; }
+  .app-layout .workspace, .app-layout.sidebar-collapsed .workspace { margin-left: 0; }
+  .app-layout .mobile-menu { display: inline-flex; flex-shrink: 0; }
+  .app-layout .sidebar-close { display: inline-flex; position: absolute; right: 8px; top: 8px; width: 36px; height: 40px; align-items: center; justify-content: center; }
+  .app-layout .sidebar .brand { margin-top: 18px; }
+  .sidebar-backdrop { position: fixed; inset: 0; z-index: 20; border: 0; background: #0006; }
+  .app-layout.sidebar-collapsed .sidebar span, .app-layout.sidebar-collapsed .sidebar .workspace-label { display: initial; }
+  .app-layout.sidebar-collapsed .sidebar .brand-lockup { display: flex; }
+  .app-layout.sidebar-collapsed .sidebar .collapsed-brand-icon { display: none; }
+  .app-layout.sidebar-collapsed .sidebar nav a, .app-layout.sidebar-collapsed .sidebar-bottom a { justify-content: flex-start; padding: 6px 10px; }
+  .app-layout .sidebar-bottom > button[aria-label="Expandir menu"], .app-layout .sidebar-bottom > button[aria-label="Recolher menu"] { display: none; }
+  .topbar { justify-content: space-between; padding-inline: 20px; }
+  .topbar-context { display: none; }
+  .main-content { padding: 24px; }
+  .page-title { gap: 16px; flex-wrap: wrap; }
+  .page-title .actions { flex-wrap: wrap; }
+  .dashboard-grid, .settings-layout, .candidate-summary { grid-template-columns: minmax(0, 1fr); }
+  .metric-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .vacancy-board-filters, .list-toolbar { flex-wrap: wrap; }
+  .list-toolbar > .search-field { flex: 1 1 260px; }
+  .auth-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+
+@media (max-width: 800px) {
+  .register-layout { grid-template-columns: minmax(0, 1fr); max-width: 480px; }
+  .vacancy-directory-v2 .vacancy-board-list { grid-template-columns: minmax(0, 1fr); }
+  .compatibility-filters, .compatibility-summary-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .vacancy-information-groups { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 600px) {
+  .manager-module-nav { grid-template-columns: minmax(0, 1fr); gap: 10px; }
+  .main-content { padding: 20px 14px; }
+  .topbar { min-height: 64px; height: auto; padding: 10px 12px; gap: 4px; }
+  .topbar-actions { gap: 0; margin-left: auto; }
+  .topbar .icon-button, .topbar-actions > .icon-button:last-child, .topbar .search-trigger { width: 40px; height: 44px; padding: 9px; display: inline-flex; justify-content: center; align-items: center; }
+  .topbar .workspace-back { width: 36px; min-width: 36px; padding-inline: 6px; }
+  .topbar .workspace-back span, .topbar .user-chip { display: none; }
+  .sidebar nav a, .sidebar-bottom a, .sidebar-bottom button { min-height: 44px; }
+  .public-header { height: auto; min-height: 76px; padding: 14px 16px; gap: 14px; flex-direction: row; flex-wrap: wrap; }
+  .public-header nav { flex: 1 1 100%; flex-direction: row; align-items: stretch; justify-content: flex-start; flex-wrap: wrap; gap: 8px; }
+  .public-header nav .button { flex: 1 1 135px; min-height: 44px; justify-content: center; }
+  .careers-home .public-header nav > .button { min-height: 44px; }
+  .button { min-height: 44px; white-space: normal; text-align: center; }
+  .form-actions { align-items: stretch; }
+  .form-actions > .button { width: 100%; }
+  .form-grid, .form-section .form-grid, .email-settings-grid { grid-template-columns: minmax(0, 1fr); }
+  .form-grid > * { min-width: 0; }
+  input:not([type="checkbox"]):not([type="radio"]):not([type="range"]):not([type="file"]), select, textarea { font-size: 16px; }
+  .field input:not([type="checkbox"]):not([type="radio"]), .field select { min-height: 44px; }
+  .section-heading, .vacancy-information-heading, .candidate-progress-heading { flex-wrap: wrap; }
+  .page-title .actions > .button { flex: 1 1 150px; }
+  .list-toolbar > *, .registered-managers .field { min-width: 0; max-width: 100%; }
+  .vacancy-board-filters { display: grid; grid-template-columns: minmax(0, 1fr); }
+  .vacancy-board-filters > *, .task-filter, .vacancy-board-filters select { width: 100%; min-width: 0; max-width: 100%; }
+  .vacancy-directory-v2 .vacancy-card-actions > .button { flex: 1 1 100%; }
+  .vacancy-directory-v2 .vacancy-board-tags { align-items: flex-start; }
+  .vacancy-directory-v2 .vacancy-audience { white-space: normal; }
+  .vacancy-directory-quick button { min-height: 44px; }
+  .application-audience-tabs { display: flex; width: 100%; max-width: 100%; }
+  .application-audience-tabs a { flex: 1; padding: 10px; text-align: center; }
+  .vacancy-stage-board { grid-template-columns: minmax(0, 1fr); }
+  .vacancy-information-groups, .vacancy-information-description, .scoring-criteria-list { grid-template-columns: minmax(0, 1fr); }
+  .candidate-released-actions > div, .simplified-stage-summary .process-stage-counts { grid-template-columns: minmax(0, 1fr); }
+  .modal { width: calc(100% - 24px); max-height: calc(100dvh - 24px); padding: 20px 16px; }
+  .modal input, .modal select, .modal textarea { scroll-margin-block: 24px; }
+  .register-header { gap: 12px; flex-wrap: wrap; }
+  .register-card h1 { font-size: 2rem; }
+  .register-intro h2 { font-size: clamp(2.3rem, 10vw, 3rem); }
+  .register-card .field, .register-input-wrap { min-width: 0; }
+  .register-progress li { min-width: 0; }
+  .auth-layout { display: block; }
+  .auth-main, .candidate-login .auth-main { padding: 20px 16px 32px; }
+  .candidate-login .auth-card { padding: 24px 18px; }
+  .job-search { grid-template-columns: minmax(0, 1fr); }
+  .job-search > .search-field { grid-column: auto; }
+}
+
+@media (max-width: 360px) {
+  .topbar .icon-button, .topbar .search-trigger { width: 36px; padding: 8px; }
+  .topbar-actions > .icon-button:last-child { width: 36px; }
+  .metric-grid, .compatibility-summary-cards, .compatibility-filters { grid-template-columns: minmax(0, 1fr); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-layout .sidebar { transition: none; }
+}

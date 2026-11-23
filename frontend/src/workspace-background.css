@@ -1,0 +1,21 @@
+/* Sculpted ribbons, kept at the edges of the reading area. */
+.app-layout .workspace {
+  background-color: color-mix(in srgb, var(--background) 75%, var(--surface));
+  background-image: url("/assets/brand/workspace-waves.svg");
+  background-size: max(100%, 1100px) auto;
+  background-position: right top;
+  background-repeat: no-repeat;
+}
+.app-layout .sidebar {
+  background-image: linear-gradient(165deg, transparent 65%, color-mix(in srgb, var(--identity) 4%, transparent));
+}
+.app-layout .topbar {
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
+  backdrop-filter: blur(10px);
+}
+@media (max-width: 900px) {
+  .app-layout .workspace { background-size: 1100px auto; background-position: 65% top; }
+}
+@media print {
+  .app-layout .workspace, .app-layout .sidebar { background-image: none; }
+}

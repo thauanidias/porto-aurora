@@ -1,0 +1,9 @@
+node_modules
+dist
+test-results
+playwright-report
+
+.npm-cache/
+.playwright-browsers/
+.e2e-credentials.json
+*.tsbuildinfo
