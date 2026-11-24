@@ -6,6 +6,8 @@ Plataforma de recrutamento e seleção apresentada no portfólio de **Thauani Di
 
 O projeto reúne portal de carreiras, cadastro de candidatos e áreas de RH e gestores para acompanhar vagas e processos seletivos.
 
+Construído por **Thauani Dias com auxílio de inteligência artificial**, incluindo apoio na geração e nos ajustes de código, na identidade visual e na documentação. O projeto faz parte de um processo de aprendizado em desenvolvimento web.
+
 ## Funcionalidades
 
 - Portal de vagas externas e oportunidades internas.
